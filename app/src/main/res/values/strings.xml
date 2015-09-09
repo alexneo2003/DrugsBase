@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Drugs Base</string>
+
+    <string name="about">About</string>
+    <string name="lsd">LSD</string>
+
+    <string-array name="drugs">
+        <item>Кокаин</item>
+        <item>Марихуана</item>
+        <item>Гидропоника</item>
+        <item>Героин</item>
+        <item>Опиум</item>
+        <item>Алкоголь</item>
+        <item>Экстази</item>
+        <item>ЛСД</item>
+        <item>Риталин</item>
+        <item>Обезболивающие</item>
+        <item>Ингалянты</item>
+        <item>Насвай</item>
+        <item>Бутират</item>
+        <item>Промедол</item>
+        <item>Кетамин</item>
+        <item>Метадон</item>
+        <item>Коаксил</item>
+        <item>Первитин (метамфетамины)</item>
+    </string-array>
+    <string name="ok">OK</string>
+
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Drugs Base</string>
+    <string name="about">О программе</string>
+    <string name="lsd">ЛСД</string>
+    <string name="ok">OK</string>
+</resources>
