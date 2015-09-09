@@ -19,15 +19,23 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ListView listView;
-    String[] drugs;
+    ArrayList<Drugs> drugs = new ArrayList<>();
+    DrugsAdapter drugsAdapter;
+
+/*    private ListView listView; */
+//    String[] drugs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listView = (ListView) findViewById(R.id.listView);
+        ListView listView = (ListView) findViewById(R.id.listView);
+        DrugsAdapter drugsAdapter = new DrugsAdapter(this, drugs);
+        listView.setAdapter(drugsAdapter);
+
+
+/*        listView = (ListView) findViewById(R.id.listView);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.drugs, android.R.layout.simple_list_item_1);
 
@@ -38,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getApplicationContext(), ((TextView) view).getText(), Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
     }
 
