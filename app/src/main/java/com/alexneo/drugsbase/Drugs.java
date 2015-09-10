@@ -5,10 +5,18 @@ package com.alexneo.drugsbase;
  */
 public class Drugs {
 
-    String drugs;
+    private String drugs;
 
-    Drugs(String _describe){
-        drugs = _describe;
+    public String getDrugs() {
+        return drugs;
     }
 
+    public void setDrugs(String drugs) {
+        this.drugs = drugs;
+    }
+
+    public Drugs(String drugs) {
+
+        this.drugs = drugs;
+    }
 }

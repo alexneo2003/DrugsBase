@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         ListView listView = (ListView) findViewById(R.id.listView);
         DrugsAdapter drugsAdapter = new DrugsAdapter(this, drugs);
+        drugs.add(new Drugs("-=LSD=-"));
         listView.setAdapter(drugsAdapter);
 
 

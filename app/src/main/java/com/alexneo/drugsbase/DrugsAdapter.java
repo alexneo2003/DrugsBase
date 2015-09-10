@@ -49,15 +49,19 @@ public class DrugsAdapter extends BaseAdapter{
             view = Inflater.inflate(R.layout.item_layout, parent, false);
         }
 
-        Drugs d = getDrugs (position);
+//        Drugs d = getDrugs (position);
 
-        ((TextView) view.findViewById(R.id.textView)).setText(d.drugs);
+        Drugs drugs = getDrugs(position);
+
+//        view.findViewById(R.id.textView).setText(d.drugs);
+        TextView textView = (TextView) view.findViewById(R.id.textView);
+        textView.setText(drugs.getDrugs());
 
         return view;
     }
 
-    Drugs getDrugs(int position) {
-        return ((Drugs) getDrugs(position));
+    private Drugs getDrugs(int position) {
+        return ((Drugs) getItem(position));
     }
 
 }
