@@ -4,7 +4,7 @@
     <string name="about">About</string>
     <string name="lsd">LSD</string>
 
-    <string-array name="drugs">
+    <string-array name="name">
         <item>Кокаин</item>
         <item>Марихуана</item>
         <item>Гидропоника</item>
@@ -25,5 +25,9 @@
         <item>Первитин (метамфетамины)</item>
     </string-array>
     <string name="ok">OK</string>
+    <string name="title_activity_drug_item">DrugItemActivity</string>
+
+    <string name="drug_item_title">Drug Item Title</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

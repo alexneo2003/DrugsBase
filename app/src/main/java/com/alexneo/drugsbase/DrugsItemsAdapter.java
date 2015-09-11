@@ -8,32 +8,31 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.zip.Inflater;
 
 /**
  * Created by Alex Neo on 09.09.2015.
  */
-public class DrugsAdapter extends BaseAdapter{
+public class DrugsItemsAdapter extends BaseAdapter{
 
-    Context ctx;
-    LayoutInflater Inflater;
-    ArrayList<Drugs> objects;
+    List<DrugsItems> list;
+    LayoutInflater layoutInflater;
 
-    DrugsAdapter(Context context, ArrayList<Drugs> drugs){
-        ctx = context;
-        objects = drugs;
-        Inflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    public DrugsItemsAdapter(Context context, List<DrugsItems> list) {
+        this.list = list;
+        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
 
     @Override
     public int getCount() {
-        return objects.size();
+        return list.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return objects.get(position);
+        return list.get(position);
     }
 
     @Override
@@ -46,22 +45,23 @@ public class DrugsAdapter extends BaseAdapter{
 
         View view = convertView;
         if (view == null) {
-            view = Inflater.inflate(R.layout.item_layout, parent, false);
+            view = layoutInflater.inflate(R.layout.item_layout, parent, false);
+
         }
 
-//        Drugs d = getDrugs (position);
+//        DrugsItems d = getName (position);
 
-        Drugs drugs = getDrugs(position);
+        DrugsItems drugsItems = getDrugs(position);
 
 //        view.findViewById(R.id.textView).setText(d.drugs);
         TextView textView = (TextView) view.findViewById(R.id.textView);
-        textView.setText(drugs.getDrugs());
+        textView.setText(drugsItems.getName());
 
         return view;
     }
 
-    private Drugs getDrugs(int position) {
-        return ((Drugs) getItem(position));
+    private DrugsItems getDrugs(int position) {
+        return ((DrugsItems) getItem(position));
     }
 
 }
