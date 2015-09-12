@@ -12,12 +12,12 @@ import java.util.List;
 /**
  * Created by Alex Neo on 09.09.2015.
  */
-public class DrugsItemsAdapter extends BaseAdapter{
+public class DrugsAdapter extends BaseAdapter{
 
-    List<DrugsItems> list;
+    List<Drug> list;
     LayoutInflater layoutInflater;
 
-    public DrugsItemsAdapter(Context context, List<DrugsItems> list) {
+    public DrugsAdapter(Context context, List<Drug> list) {
         this.list = list;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -47,16 +47,16 @@ public class DrugsItemsAdapter extends BaseAdapter{
 
         }
 
-        DrugsItems drugsItems = getDrugs(position);
+        Drug drug = getDrugs(position);
 
-        TextView textView = (TextView) view.findViewById(R.id.textView);
-        textView.setText(drugsItems.getNameDrugs());
+        TextView textView = (TextView) view.findViewById(R.id.title);
+        textView.setText(drug.name);
 
         return view;
     }
 
-    private DrugsItems getDrugs(int position) {
-        return ((DrugsItems) getItem(position));
+    private Drug getDrugs(int position) {
+        return ((Drug) getItem(position));
     }
 
 }

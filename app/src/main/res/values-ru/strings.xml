@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string nameDrugs="app_name">Drugs Base</string>
-    <string nameDrugs="about">О программе</string>
-    <string nameDrugs="lsd">ЛСД</string>
-    <string nameDrugs="ok">OK</string>
+    <string name="app_name">Drugs Base</string>
+    <string name="about">О программе</string>
+    <string name="lsd">ЛСД</string>
+    <string name="ok">OK</string>
+    <string name="addiction_level_high">Сильная зависимость</string>
 </resources>

@@ -29,5 +29,9 @@
 
     <string name="drug_item_title">Drug Item Title</string>
     <string name="action_settings">Settings</string>
+    <string name="addiction_level_high">High addiction</string>
+    <string name="addiction_level_none">No addication</string>
+    <string name="addiction_level_low">Low addication</string>
+    <string name="addiction_level_medium">Medium addiction</string>
 
 </resources>
