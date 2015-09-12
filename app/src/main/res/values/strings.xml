@@ -29,9 +29,31 @@
 
     <string name="drug_item_title">Drug Item Title</string>
     <string name="action_settings">Settings</string>
+
+    <!-- DRUGS DESCRIPTIONS  -->
+
+    <string name="drug_lsd_discription">Является до сих пор одним из самых сильнодействующих наркотиков и самых ядовитых химических веществ на земле. ЛСД получают из лизергиновой кислоты, добываемой из спорыньи, микроскопического грибка, паразитирующего на ржи и других злаковых культурах. Последствия от приема ЛСД непредсказуемы. Мизерная доза ЛСД может наркомана погрузить в наркотические галлюцинации на 12 и более часов, неземное "блаженство" или величайший ужас.</string>
+
+    <!-- DRUGS  CAUTIONS  -->
+
+    <string name="drug_lsd_cautions"></string>
+
+    <!-- DRUGS  ADDICTION LEVEL  -->
+
     <string name="addiction_level_high">High addiction</string>
-    <string name="addiction_level_none">No addication</string>
-    <string name="addiction_level_low">Low addication</string>
+    <string name="addiction_level_none">No addiction</string>
+    <string name="addiction_level_low">Low addiction</string>
     <string name="addiction_level_medium">Medium addiction</string>
+    <string name="drug_ganja_title">Ganja</string>
+    <string name="title_activity_tab">TabActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+
+    <!-- DRUGS  PRISE  -->
+
+    <!-- DRUGS  USAGE  -->
+
+    <!-- DRUGS  AFFECTS  -->
+
 
 </resources>

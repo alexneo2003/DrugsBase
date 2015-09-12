@@ -2,10 +2,12 @@ package com.alexneo.drugsbase;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class DrugDetailsActivity extends AppCompatActivity {
@@ -17,16 +19,22 @@ public class DrugDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drug_item);
         TextView textView = (TextView) findViewById(R.id.title);
+        TextView descriptionView = (TextView) findViewById(R.id.description);
+        TextView usageView = (TextView) findViewById(R.id.usage);
+        TextView affectView = (TextView) findViewById(R.id.affect);
+        TextView cautionsView = (TextView) findViewById(R.id.cautions);
         TextView addictionView = (TextView) findViewById(R.id.addiction);
+        TextView priceView = (TextView) findViewById(R.id.price);
+        ImageView coverView = (ImageView) findViewById(R.id.cover);
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
 
         String string =  bundle.getString("title");
         String description = bundle.getString("description");
-        String causions = bundle.getString("causions");
-        String affect = bundle.getString("affect");
         String usage = bundle.getString("usage");
+        String cautions = bundle.getString("cautions");
+        String affect = bundle.getString("affect");
         int price = bundle.getInt("price");
         // тут ошибка будет, мне кажется.
         AddictionLevel addiction = (AddictionLevel) bundle.get("addiction");
@@ -34,7 +42,16 @@ public class DrugDetailsActivity extends AppCompatActivity {
 
         // ну в общем каи текста заполнять ты уже знаешь, покажу только ещё одну вещь
         textView.setText(string);
+        descriptionView.setText(description);
+        usageView.setText(usage);
+        affectView.setText(affect);
+        cautionsView.setText(cautions);
+        priceView.setText(""+price);
+//        coverView.setImageDrawable(cover);
+//        coverView.setImageResource(R.drawable.lsd);
 
+
+        assert addiction != null;
         switch (addiction) {
             case None:
                 addictionView.setText(R.string.addiction_level_none);
@@ -54,19 +71,13 @@ public class DrugDetailsActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_drug_item, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -81,7 +92,7 @@ public class DrugDetailsActivity extends AppCompatActivity {
         intent.putExtra("description", drug.description);
         intent.putExtra("usage", drug.usage);
         intent.putExtra("affect", drug.affect);
-        intent.putExtra("causions", drug.causions);
+        intent.putExtra("cautions", drug.cautions);
         intent.putExtra("addiction", drug.addiction);
         intent.putExtra("price", drug.price);
         intent.putExtra("cover", drug.cover);

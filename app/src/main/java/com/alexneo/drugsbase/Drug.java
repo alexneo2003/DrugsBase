@@ -14,7 +14,7 @@ public class Drug {
     // что вызывает
     public String affect;
     // побочный эффект
-    public String causions;
+    public String cautions;
     // уровень зависимости
     public AddictionLevel addiction;
     // цена в шкурках
@@ -22,8 +22,15 @@ public class Drug {
     // картинка
     public String cover;
 
-    public Drug(String name) {
+    public Drug(String name, String description, String usage, String affect, String cautions, AddictionLevel addiction, int price, String cover) {
         this.name = name;
+        this.description = description;
+        this.usage = usage;
+        this.affect = affect;
+        this.cautions = cautions;
+        this.addiction = addiction;
+        this.price = price;
+        this.cover = cover;
     }
 
 
@@ -36,7 +43,7 @@ public class Drug {
         this.name = name;
     }*/
 
-    public static Drug createDrug() {
+    /*public static Drug createDrug() {
         return new Drug("Созданный наркотик");
-    }
+    }*/
 }

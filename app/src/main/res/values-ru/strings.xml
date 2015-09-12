@@ -5,4 +5,9 @@
     <string name="lsd">ЛСД</string>
     <string name="ok">OK</string>
     <string name="addiction_level_high">Сильная зависимость</string>
+    <string name="drug_ganja_title">Марихуана</string>
+    <string name="addiction_level_medium">Средняя зависимость</string>
+    <string name="addiction_level_low">Низкая зависимость</string>
+    <string name="addiction_level_none">Нет зависимости</string>
+    <string name="action_settings">Настройки</string>
 </resources>

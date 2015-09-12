@@ -15,6 +15,7 @@
 
             tools:context="com.alexneo.drugsbase.DrugDetailsActivity">
             <ImageView
+                android:id="@+id/cover"
                 android:scaleType="centerCrop"
                 android:src="@drawable/lsd"
                 android:layout_width="match_parent"
@@ -32,7 +33,7 @@
                 android:layout_above="@+id/title"
                 android:text="$100"
                 android:textSize="14sp"
-                android:layout_marginLeft="14dp"
+                android:layout_marginLeft="18dp"
                 android:layout_marginBottom="-12dp"
                 android:padding="5dp"
                 android:background="@drawable/price_background"
@@ -86,6 +87,18 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
         <TextView
+            android:id="@+id/cautions"
+            android:textColor="#444"
+            android:text="Some drug cautions"
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+            <View
+            android:layout_marginLeft="16dp"
+            android:background="#ccc"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+            <TextView
             android:id="@+id/affect"
             android:textColor="#444"
             android:text="Some drug affect"

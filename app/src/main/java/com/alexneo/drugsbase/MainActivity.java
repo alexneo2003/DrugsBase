@@ -18,20 +18,33 @@ public class MainActivity extends AppCompatActivity {
 
 
     List<Drug> drugsList = new ArrayList<Drug>(){{
-        add(new Drug("LSD"){{
+        /*add(new Drug("LSD"){{
             description = "Выглядит как порошок или таблетки разных форм и цветов";
             usage = "Таблетка ложится под язык, рассасывается 2-3 минуты.";
             affect = "Сильные галюцинации, начинаешь видеть провалы в стенах.";
-            causions = "Помутнение рассудка, слабость, длится двое суток";
+            cautions = "Помутнение рассудка, слабость, длится двое суток";
             addiction = AddictionLevel.High;
             price = 100;
-            // наверно побочные эффекты тоже стоит писать
-            // и какой эффект даёт
-        }});
-        add(new Drug("LSD2"));
-        add(new Drug("LSD3"));
-        add(new Drug("LSD4"));
-        add(new Drug("LSD5"));
+        }});*/
+        add(new Drug("Марихуана",
+                "Галюциноген",
+                "Курение",
+                "Помутнение разума",
+                "Нет",
+                AddictionLevel.Medium,
+                20,
+                "lsd"));
+        add(new Drug("LSD",
+                "Выглядит как порошок или таблетки разных форм и цветов",
+                "Таблетка ложится под язык, рассасывается 2-3 минуты.",
+                "Помутнение рассудка, слабость, длится двое суток",
+                "Передозировка",
+                AddictionLevel.High,
+                100,
+                "212"));
+//        add(new Drug("LSD3"));
+//        add(new Drug("LSD4"));
+//        add(new Drug("LSD5"));
     }};
 
     @Override
@@ -56,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
 
         ListView listView = (ListView) findViewById(R.id.listView);
         final DrugsAdapter drugsAdapter = new DrugsAdapter(this, drugsList);
-//        nameDrugs.add(new  Drug("LSD"));
         listView.setAdapter(drugsAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -71,27 +83,10 @@ public class MainActivity extends AppCompatActivity {
                 Drug drug = drugsList.get(position);
                 startActivity(DrugDetailsActivity.getActivityIntent(getBaseContext(), drug));
 
-                Log.d("click", "click");
+                Log.d("click", "main item click");
             }
         });
     }
-
-
-/*        listView = (ListView) findViewById(R.id.listView);
-
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.drugs, android.R.layout.simple_list_item_1);
-
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), ((TextView) view).getText(), Toast.LENGTH_SHORT).show();
-            }
-        });*/
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
