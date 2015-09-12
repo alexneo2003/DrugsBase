@@ -1,18 +1,27 @@
 package com.alexneo.drugsbase;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class DrugItemActivity extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drug_item);
+        TextView textView = (TextView) findViewById(R.id.drugItemTitle);
 
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
 
+        String string = (String) bundle.get("title");
+        textView.setText(string);
 
     }
 

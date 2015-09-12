@@ -19,8 +19,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ListView listView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,20 +26,19 @@ public class MainActivity extends AppCompatActivity {
 
         ListView listView = (ListView) findViewById(R.id.listView);
         final DrugsItemsAdapter drugsItemsAdapter = new DrugsItemsAdapter(this, initData());
-//        drugs.add(new DrugsItems("-=LSD=-"));
+//        nameDrugs.add(new  DrugsItems("LSD"));
         listView.setAdapter(drugsItemsAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getBaseContext(), DrugItemActivity.class);
+                intent.putExtra("title", DrugsItems.getNameDrugs());
                 startActivity(intent);
 
                 Log.d("click", "click");
             }
         });
-
-
     }
 
     private List<DrugsItems> initData(){

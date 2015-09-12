@@ -5,17 +5,17 @@ package com.alexneo.drugsbase;
  */
 public class DrugsItems {
 
-    private String name;
+    private static String nameDrugs;
 
-    public DrugsItems(String name) {
-        this.name = name;
+    public DrugsItems(String nameDrugs) {
+        this.nameDrugs = nameDrugs;
     }
 
-    public String getName() {
-        return name;
+    public static String getNameDrugs() {
+        return nameDrugs;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameDrugs(String nameDrugs) {
+        this.nameDrugs = nameDrugs;
     }
 }

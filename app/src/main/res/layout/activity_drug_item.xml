@@ -9,6 +9,7 @@
     tools:context="com.alexneo.drugsbase.DrugItemActivity">
 
     <TextView
+        android:id="@+id/drugItemTitle"
         android:text="@string/drug_item_title"
         android:textSize="35sp"
         android:layout_width="wrap_content"

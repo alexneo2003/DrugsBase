@@ -7,9 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.Inflater;
 
 /**
  * Created by Alex Neo on 09.09.2015.
@@ -49,13 +47,10 @@ public class DrugsItemsAdapter extends BaseAdapter{
 
         }
 
-//        DrugsItems d = getName (position);
-
         DrugsItems drugsItems = getDrugs(position);
 
-//        view.findViewById(R.id.textView).setText(d.drugs);
         TextView textView = (TextView) view.findViewById(R.id.textView);
-        textView.setText(drugsItems.getName());
+        textView.setText(drugsItems.getNameDrugs());
 
         return view;
     }
