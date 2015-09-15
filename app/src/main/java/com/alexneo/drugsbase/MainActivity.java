@@ -1,21 +1,37 @@
 package com.alexneo.drugsbase;
 
 import android.app.AlertDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Build;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTabHost;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TabHost;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.R.id.tabcontent;
+
 public class MainActivity extends AppCompatActivity {
 
+    private static final int LAYOUT =  R.layout.activity_main;
+    private Toolbar toolbar;
+    private DrawerLayout drawerLayout;
 
     List<Drug> drugsList = new ArrayList<Drug>(){{
         /*add(new Drug("LSD"){{
@@ -34,6 +50,54 @@ public class MainActivity extends AppCompatActivity {
                 AddictionLevel.Medium,
                 20,
                 "lsd"));
+        add(new Drug("Марихуана",
+                "Галюциноген",
+                "Курение",
+                "Помутнение разума",
+                "Нет",
+                AddictionLevel.Medium,
+                20,
+                "lsd"));
+        add(new Drug("Марихуана",
+                "Галюциноген",
+                "Курение",
+                "Помутнение разума",
+                "Нет",
+                AddictionLevel.Medium,
+                20,
+                "lsd"));
+        add(new Drug("Марихуана",
+                "Галюциноген",
+                "Курение",
+                "Помутнение разума",
+                "Нет",
+                AddictionLevel.Medium,
+                20,
+                "lsd"));
+        add(new Drug("Марихуана",
+                "Галюциноген",
+                "Курение",
+                "Помутнение разума",
+                "Нет",
+                AddictionLevel.Medium,
+                20,
+                "lsd"));
+        add(new Drug("Марихуана",
+                "Галюциноген",
+                "Курение",
+                "Помутнение разума",
+                "Нет",
+                AddictionLevel.Medium,
+                20,
+                "lsd"));
+        add(new Drug("Марихуана",
+                "Галюциноген",
+                "Курение",
+                "Помутнение разума",
+                "Нет",
+                AddictionLevel.Medium,
+                20,
+                "lsd"));
         add(new Drug("LSD",
                 "Выглядит как порошок или таблетки разных форм и цветов",
                 "Таблетка ложится под язык, рассасывается 2-3 минуты.",
@@ -42,15 +106,37 @@ public class MainActivity extends AppCompatActivity {
                 AddictionLevel.High,
                 100,
                 "212"));
-//        add(new Drug("LSD3"));
-//        add(new Drug("LSD4"));
-//        add(new Drug("LSD5"));
     }};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setTheme(R.style.AppDefault);
+        setContentView(LAYOUT);
+
+        initToolbar();
+        initNavigationView();
+
+/*        ImageView imageView = (ImageView) findViewById(R.id.item_layout_image);
+        Bitmap mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.lsd);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            //Default
+            imageView.setBackgroundResource(R.drawable.lsd);
+        } else {
+            //RoundCorners
+            RoundCornersDrawable round = new RoundCornersDrawable(mBitmap,
+                    getResources().getDimension(R.dimen.cardview_radius), 0); //or your custom radius
+
+            CardView cardView = (CardView) findViewById(R.id.card_view);
+            cardView.setPreventCornerOverlap(false); //it is very important
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
+                imageView.setBackground(round);
+            else
+                imageView.setBackgroundDrawable(round);
+        }*/
+
         /*
         // допустим у нас есть наркотик
         Drug myDrug = new Drug("Мой новый наркотик");
@@ -88,7 +174,23 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
+    private void initToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.app_name);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                return false;
+            }
+        });
+        toolbar.inflateMenu(R.menu.menu);
+    }
+
+    private void initNavigationView() {
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+    }
+
+/*    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -101,5 +203,5 @@ public class MainActivity extends AppCompatActivity {
         new AlertDialog.Builder(this).setTitle(R.string.about).setView(view).setPositiveButton(R.string.ok, null).create().show();
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }

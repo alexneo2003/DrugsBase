@@ -1,8 +1,5 @@
 package com.alexneo.drugsbase;
 
-/**
- * Created by Alex Neo on 09.09.2015.
- */
 public class Drug {
     // из-за статика это
     // статик это тип переменных, которые относятся не к обьекту, а к классу.
@@ -33,17 +30,4 @@ public class Drug {
         this.cover = cover;
     }
 
-
-    // вообще это граммотный паттерн, но здесь он совсем не нужен
-    /*public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }*/
-
-    /*public static Drug createDrug() {
-        return new Drug("Созданный наркотик");
-    }*/
 }

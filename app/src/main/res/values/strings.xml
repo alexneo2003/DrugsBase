@@ -28,6 +28,7 @@
     <string name="title_activity_drug_item">DrugItemActivity</string>
 
     <string name="drug_item_title">Drug Item Title</string>
+    <string name="drug_menu_title">Drugs</string>
     <string name="action_settings">Settings</string>
 
     <!-- DRUGS DESCRIPTIONS  -->
@@ -48,6 +49,15 @@
     <string name="title_activity_tab">TabActivity</string>
 
     <string name="hello_world">Hello world!</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="title_section1">Drugs</string>
+    <string name="title_section2">Weapons</string>
+    <string name="title_section3">Alcohol</string>
+    <string name="title_section4">Settings</string>
+    <string name="search_title">Search</string>
 
     <!-- DRUGS  PRISE  -->
 

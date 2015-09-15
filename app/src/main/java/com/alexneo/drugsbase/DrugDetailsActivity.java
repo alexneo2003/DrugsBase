@@ -46,7 +46,7 @@ public class DrugDetailsActivity extends AppCompatActivity {
         usageView.setText(usage);
         affectView.setText(affect);
         cautionsView.setText(cautions);
-        priceView.setText(""+price);
+        priceView.setText("$"+price);
 //        coverView.setImageDrawable(cover);
 //        coverView.setImageResource(R.drawable.lsd);
 

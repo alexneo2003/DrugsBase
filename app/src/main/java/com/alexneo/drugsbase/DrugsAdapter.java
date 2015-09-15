@@ -1,21 +1,25 @@
 package com.alexneo.drugsbase;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.zip.Inflater;
 
-/**
- * Created by Alex Neo on 09.09.2015.
- */
 public class DrugsAdapter extends BaseAdapter{
 
     List<Drug> list;
     LayoutInflater layoutInflater;
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        return (LinearLayout) inflater.inflate(R.layout.item_layout, container, false);
+    }
 
     public DrugsAdapter(Context context, List<Drug> list) {
         this.list = list;
