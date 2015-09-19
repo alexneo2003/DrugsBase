@@ -87,7 +87,7 @@ public class DrugDetailsActivity extends AppCompatActivity {
 
     public static Intent getActivityIntent(Context context, Drug drug) {
 
-        Intent intent = new Intent(context, DrugDetailsActivity.class);
+        Intent intent= new Intent(context, DrugDetailsActivity.class);
         intent.putExtra("title", drug.name);
         intent.putExtra("description", drug.description);
         intent.putExtra("usage", drug.usage);

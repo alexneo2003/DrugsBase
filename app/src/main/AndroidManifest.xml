@@ -19,11 +19,6 @@
             android:name=".DrugDetailsActivity"
             android:label="@string/title_activity_drug_item" >
         </activity>
-        <activity
-            android:name=".TabActivity"
-            android:label="@string/app_name" >
-
-        </activity>
     </application>
 
 </manifest>

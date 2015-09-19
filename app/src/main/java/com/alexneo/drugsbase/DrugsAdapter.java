@@ -9,23 +9,25 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alexneo.drugsbase.Fragment.DrugFragment;
+
 import java.util.List;
 import java.util.zip.Inflater;
 
 public class DrugsAdapter extends BaseAdapter{
 
+    Context context;
     List<Drug> list;
     LayoutInflater layoutInflater;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        return (LinearLayout) inflater.inflate(R.layout.item_layout, container, false);
+        return inflater.inflate(R.layout.item_layout, container, false);
     }
 
-    public DrugsAdapter(Context context, List<Drug> list) {
+    public DrugsAdapter (Context context, List<Drug> list) {
         this.list = list;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
-
 
     @Override
     public int getCount() {
