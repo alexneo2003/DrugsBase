@@ -12,4 +12,6 @@
     <string name="action_settings">Настройки</string>
     <string name="search_title">Поиск</string>
     <string name="drug_menu_title">Наркотики</string>
+    <string name="alcohol_menu_title">Алкоголь</string>
+    <string name="weapon_menu_title">Оружие</string>
 </resources>

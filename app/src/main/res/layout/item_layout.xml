@@ -20,7 +20,7 @@
 
 
             <ImageView
-                android:id="@+id/item_layout_image"
+                android:id="@+id/cover"
                 android:src="@drawable/lsd"
                 android:scaleType="centerCrop"
                 android:layout_width="match_parent"

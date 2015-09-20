@@ -1,12 +1,17 @@
 package com.alexneo.drugsbase;
 
-/**
- * Created by Alex Neo on 12.09.2015.
- */
-// Степени зависимости типа
+
+// Степени зависимости
+
+import com.google.gson.annotations.SerializedName;
+
 public enum AddictionLevel {
-    None,   // нет зависимости
-    Low,    // низкая зависимость
-    Medium, // средняя зависимость
-    High    // высокая зависимость
+    @SerializedName
+            ("0") None,
+    @SerializedName
+            ("1")Low,
+    @SerializedName
+            ("2")Medium,
+    @SerializedName
+            ("3")High
 }

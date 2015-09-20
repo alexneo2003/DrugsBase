@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.setDrawerListener(toggle);
         toggle.syncState();
 
-        final NavigationView navigationView = (NavigationView) findViewById(R.id.navigation );
+        final NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -88,9 +88,13 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()){
                     case R.id.actionDrugItem:
                         showDrugTab();
+                    case R.id.actionWeaponItem:
+                        showWeaponTab();
+                    case R.id.actionAlcoholItem:
+                        showAlcoholTab();
                 }
 
-                return false;
+                return true;
             }
         });
 
@@ -98,6 +102,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void showDrugTab(){
         viewPager.setCurrentItem(0);
+    }
+    private void showWeaponTab(){
+        viewPager.setCurrentItem(1);
+    }
+    private void showAlcoholTab(){
+        viewPager.setCurrentItem(2);
     }
 
 /*    @Override

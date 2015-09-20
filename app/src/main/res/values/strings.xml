@@ -29,6 +29,9 @@
 
     <string name="drug_item_title">Drug Item Title</string>
     <string name="drug_menu_title">Drugs</string>
+    <string name="search_title">Search</string>
+    <string name="weapon_menu_title">Weapons</string>
+    <string name="alcohol_menu_title">Alcohol</string>
     <string name="action_settings">Settings</string>
 
     <string name="view_nawigation_open">Open</string>
@@ -60,9 +63,7 @@
     <string name="title_section2">Weapons</string>
     <string name="title_section3">Alcohol</string>
     <string name="title_section4">Settings</string>
-    <string name="search_title">Search</string>
-    <string name="weapons_menu_title">Weapons</string>
-    <string name="alcohol_menu_title">Alcohol</string>
+
 
     <!-- DRUGS  PRISE  -->
 

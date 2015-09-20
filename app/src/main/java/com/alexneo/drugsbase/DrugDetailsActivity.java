@@ -3,6 +3,7 @@ package com.alexneo.drugsbase;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,8 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class DrugDetailsActivity extends AppCompatActivity {
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +87,7 @@ public class DrugDetailsActivity extends AppCompatActivity {
     public static Intent getActivityIntent(Context context, Drug drug) {
 
         Intent intent= new Intent(context, DrugDetailsActivity.class);
+        intent.putExtra("id", drug.id);
         intent.putExtra("title", drug.name);
         intent.putExtra("description", drug.description);
         intent.putExtra("usage", drug.usage);
