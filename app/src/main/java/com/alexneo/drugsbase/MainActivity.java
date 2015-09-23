@@ -1,6 +1,7 @@
 package com.alexneo.drugsbase;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -27,6 +28,10 @@ import android.widget.ListView;
 import android.widget.TabHost;
 
 import com.alexneo.drugsbase.Adapter.TabsPagerFragmentAdapter;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +52,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppDefault);
         setContentView(LAYOUT);
+
+
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .showImageForEmptyUri(R.mipmap.placeholder)
+//                .displayer(new RoundedBitmapDisplayer(20))
+                .cacheOnDisk(true)
+                .cacheInMemory(true)
+                .build();
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
+                .defaultDisplayImageOptions(options)
+                .build();
+        ImageLoader.getInstance().init(config);
+
+
 
         initToolbar();
         initNavigationView();
@@ -85,13 +104,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 drawerLayout.closeDrawers();
-                switch (menuItem.getItemId()){
+                switch (menuItem.getItemId()) {
                     case R.id.actionDrugItem:
                         showDrugTab();
-                    case R.id.actionWeaponItem:
-                        showWeaponTab();
-                    case R.id.actionAlcoholItem:
-                        showAlcoholTab();
                 }
 
                 return true;
@@ -102,12 +117,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void showDrugTab(){
         viewPager.setCurrentItem(0);
-    }
-    private void showWeaponTab(){
-        viewPager.setCurrentItem(1);
-    }
-    private void showAlcoholTab(){
-        viewPager.setCurrentItem(2);
     }
 
 /*    @Override

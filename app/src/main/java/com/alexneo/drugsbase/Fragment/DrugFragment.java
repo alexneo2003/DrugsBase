@@ -1,6 +1,5 @@
 package com.alexneo.drugsbase.Fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.alexneo.drugsbase.AddictionLevel;
@@ -20,6 +20,8 @@ import com.alexneo.drugsbase.DrugsAdapter;
 import com.alexneo.drugsbase.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.rey.material.widget.ProgressView;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -120,11 +122,11 @@ public class DrugFragment extends Fragment{
         view = inflater.inflate(LAYOUT, container, false);
 
         listView = (ListView) view.findViewById(R.id.listView);
-
+        ProgressView progressView = (ProgressView) view.findViewById(R.id.loading);
+        progressView.setVisibility(View.VISIBLE);
 
 
         final String urlString = "http://jesuscodes.me/drugs/list.json";
-        // и тут
         new AsyncTask<Void, Void, String>(){
 
             @Override
@@ -140,7 +142,6 @@ public class DrugFragment extends Fragment{
             protected String doInBackground(Void[] params) {
                 StringBuilder sb = new StringBuilder();
                 try {
-                    // у тебя тут урл
                     URL url = new URL(urlString);
                     HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                     urlConnection.setRequestMethod("GET");
@@ -178,7 +179,6 @@ public class DrugFragment extends Fragment{
 
             }
         }.execute();
-
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

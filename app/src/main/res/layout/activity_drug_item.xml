@@ -8,21 +8,18 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
-
             tools:context="com.alexneo.drugsbase.DrugDetailsActivity">
+
             <ImageView
                 android:id="@+id/cover"
                 android:scaleType="centerCrop"
-                android:src="@drawable/lsd"
+                android:src="@mipmap/placeholder"
                 android:layout_width="match_parent"
                 android:layout_height="200dp" />
-            <!-- С тенькой лучше, правда?)
-                галимо как-то, потом надо придумать как ценник лучше поставить
-             -->
 
             <View
                 android:background="@drawable/text_protector_shadow"

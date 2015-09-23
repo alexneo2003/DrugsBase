@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 public class DrugDetailsActivity extends AppCompatActivity {
 
     @Override
@@ -35,20 +37,16 @@ public class DrugDetailsActivity extends AppCompatActivity {
         String cautions = bundle.getString("cautions");
         String affect = bundle.getString("affect");
         int price = bundle.getInt("price");
-        // тут ошибка будет, мне кажется.
         AddictionLevel addiction = (AddictionLevel) bundle.get("addiction");
         String cover = bundle.getString("cover");
 
-        // ну в общем каи текста заполнять ты уже знаешь, покажу только ещё одну вещь
         textView.setText(string);
         descriptionView.setText(description);
         usageView.setText(usage);
         affectView.setText(affect);
         cautionsView.setText(cautions);
-        priceView.setText("$"+price);
-//        coverView.setImageDrawable(cover);
-//        coverView.setImageResource(R.drawable.lsd);
-
+        priceView.setText("$" + price);
+        ImageLoader.getInstance().displayImage(cover, coverView);
 
         assert addiction != null;
         switch (addiction) {
