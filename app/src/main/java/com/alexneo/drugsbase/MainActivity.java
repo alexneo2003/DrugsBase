@@ -31,6 +31,7 @@ import com.alexneo.drugsbase.Adapter.TabsPagerFragmentAdapter;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .showImageForEmptyUri(R.mipmap.placeholder)
-//                .displayer(new RoundedBitmapDisplayer(20))
+                .displayer(new RoundedBitmapDisplayer(4))
                 .cacheOnDisk(true)
                 .cacheInMemory(true)
                 .build();

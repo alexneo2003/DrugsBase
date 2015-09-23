@@ -22,7 +22,6 @@
             <ImageView
                 android:id="@+id/cover"
                 android:src="@mipmap/placeholder"
-                android:background="#dcdcdc"
                 android:layout_margin="4dp"
                 android:scaleType="centerCrop"
                 android:layout_width="match_parent"
@@ -45,31 +44,3 @@
 
 
 </RelativeLayout>
-
-<!--
-<RelativeLayout
-    android:id="@+id/list_item"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="150dp">
-    <ImageView
-        android:src="@drawable/lsd"
-        android:scaleType="centerCrop"
-        android:layout_width="match_parent"
-        android:layout_height="150dp" />
-    <View
-        android:background="@drawable/text_protector_shadow"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-    <TextView
-        android:layout_margin="16dp"
-        android:textColor="#fff"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/title"
-        android:text="@string/drug_item_title"
-        android:textSize="35sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-</RelativeLayout>-->

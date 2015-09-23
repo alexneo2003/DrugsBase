@@ -187,7 +187,7 @@ public class DrugFragment extends Fragment{
                 startActivity(DrugDetailsActivity.getActivityIntent(getActivity(), drug));
                 //getActivity().finish();
 
-                Log.d("click", "main item click");
+                Log.d("mainList", "item click" + position);
             }
         });
 

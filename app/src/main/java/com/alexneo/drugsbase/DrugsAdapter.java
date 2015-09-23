@@ -1,15 +1,19 @@
 package com.alexneo.drugsbase;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alexneo.drugsbase.Fragment.DrugFragment;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 import java.util.zip.Inflater;
@@ -54,9 +58,13 @@ public class DrugsAdapter extends BaseAdapter{
         }
 
         Drug drug = getDrugs(position);
-
         TextView textView = (TextView) view.findViewById(R.id.title);
+        ImageView coverView = (ImageView) view.findViewById(R.id.cover);
+
         textView.setText(drug.name);
+        String cover = drug.cover;
+        ImageLoader.getInstance().displayImage(cover, coverView);
+
 
         return view;
     }
