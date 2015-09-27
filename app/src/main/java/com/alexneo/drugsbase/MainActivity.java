@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .showImageForEmptyUri(R.mipmap.placeholder)
-                .displayer(new RoundedBitmapDisplayer(4))
+//                .displayer(new RoundedBitmapDisplayer(4))
                 .cacheOnDisk(true)
                 .cacheInMemory(true)
                 .build();
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initToolbar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar_view);
         toolbar.setTitle(R.string.app_name);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
