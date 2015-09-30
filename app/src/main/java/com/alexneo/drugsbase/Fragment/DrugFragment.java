@@ -1,21 +1,13 @@
 package com.alexneo.drugsbase.Fragment;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.alexneo.drugsbase.AddictionLevel;
@@ -26,8 +18,6 @@ import com.alexneo.drugsbase.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import butterknife.ButterKnife;
-import butterknife.Bind;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -42,9 +32,6 @@ public class DrugFragment extends Fragment {
 
     private View view;
     private ListView listView;
-    private int mToolbarBackgroundColor;
-    private int mToolbarHeight;
-    private Toolbar mToolbarView;
 
     List<Drug> drugsList = new ArrayList<Drug>(){{
         add(new Drug(21,
@@ -124,9 +111,6 @@ public class DrugFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(LAYOUT, container, false);
         listView = (ListView) view.findViewById(R.id.listView);
-        mToolbarView = (Toolbar) view.findViewById(R.id.toolbar_view);
-
-
 
         final String urlString = "http://jesuscodes.me/drugs/list.json";
         new AsyncTask<Void, Void, String>(){
@@ -205,45 +189,6 @@ public class DrugFragment extends Fragment {
 
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
 
-//        configureToolbarView();
-
-    }
-
-    private void configureToolbarView() {
-        ((AppCompatActivity) getActivity()).getSupportActionBar();
-        mToolbarView.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
-        mToolbarView.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().onBackPressed();
-            }
-        });
-
-        //Remove toolbars title, as we have our own title implementation
-        mToolbarView.post(new Runnable() {
-            @Override
-            public void run() {
-                mToolbarView.setTitle("");
-
-            }
-        });
-
-        mToolbarBackgroundColor = getResources().getColor(R.color.colorPrimary);
-        TypedValue tv = new TypedValue();
-        if (getActivity().getTheme().resolveAttribute(R.attr.actionBarSize, tv, true)) {
-            mToolbarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
-        }
-        setBackgroundAlpha(mToolbarView, 0.0f, mToolbarBackgroundColor);
-    }
-
-    private void setBackgroundAlpha(View view, float alpha, int baseColor) {
-        int a = Math.min(255, Math.max(0, (int) (alpha * 255))) << 24;
-        int rgb = 0x00ffffff & baseColor;
-        view.setBackgroundColor(a + rgb);
-    }
 
 }

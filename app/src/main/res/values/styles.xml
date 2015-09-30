@@ -10,8 +10,17 @@
 
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="android:colorAccent">@color/accent</item>
+        <!--<item name="searchViewStyle">@style/AppSearchViewStyle</item>-->
 
     </style>
+<!--
+    <style name="AppSearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="android:textCursorDrawable">@drawable/white_cursor</item>
+        <item name="queryBackground">@android:color/transparent</item>
+        <item name="searchIcon">@drawable/icon_toolbar_search</item>
+        <item name="closeIcon">@drawable/icon_toolbar_clear</item>
+        <item name="queryHint">@string/search_hint</item>
+        <item name="android:imeActionId">6</item>
+    </style>-->
 
 </resources>

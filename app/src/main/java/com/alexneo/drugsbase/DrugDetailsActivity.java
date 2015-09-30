@@ -1,87 +1,88 @@
 package com.alexneo.drugsbase;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
+import android.view.MenuInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
+import com.alexneo.drugsbase.views.ObservableScrollViewWithFling;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
-import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.nineoldandroids.view.ViewHelper;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class DrugDetailsActivity extends AppCompatActivity implements ObservableScrollViewCallbacks{
 
-    private static final float MAX_TEXT_SCALE_DELTA = 0.3f; // 0.3f
+    ObservableScrollViewWithFling mScrollView;
+    TextView mTitle; //Title used instead of Toolbar.title
+    Toolbar mToolbarView;
+    protected LinearLayout llTintLayer; //Layout that we're tinting when scrolling
+    protected FrameLayout flImage; //Layout that hosts the header image
 
     private View mImageView;
     private View mOverlayView;
-    private ObservableScrollView mScrollView;
     private TextView mTitleView;
     private TextView mPriceView;
     private TextView mAddictionView;
     private int mActionBarSize;
     private int mFlexibleSpaceImageHeight;
+    private int mParallaxImageHeight;
+    private int mScrollY = 0; //Keeps track of our scroll.
+    private boolean mIsToolbarShown = true;
+    private int mToolbarHeight;
+    private boolean goingUp = false;
+
+    private int mToolbarBackgroundColor;
+
+    public DrugDetailsActivity() {
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_drug_item);
+        setContentView(R.layout.drug_item_activity);
 
-        mFlexibleSpaceImageHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
-        mActionBarSize = getActionBarSize();
+        //Store flexible space height
+        mParallaxImageHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
 
-        mImageView = findViewById(R.id.cover);
-        mOverlayView = findViewById(R.id.overlay);
-        mScrollView = (ObservableScrollView) findViewById(R.id.scroll);
-        mScrollView.setScrollViewCallbacks(this);
-        mTitleView = (TextView) findViewById(R.id.title);
-        mPriceView = (TextView) findViewById(R.id.price);
-        mAddictionView = (TextView) findViewById(R.id.addiction);
-        mTitleView.setText(getTitle());
-        setTitle(null);
+        mScrollView = (ObservableScrollViewWithFling) findViewById(R.id.observable_sv);
+        mTitle = (TextView) findViewById(R.id.title);
+        mToolbarView = (Toolbar) findViewById(R.id.toolbar_view);
+        llTintLayer = (LinearLayout) findViewById(R.id.ll_above_photo);
+        flImage = (FrameLayout) findViewById(R.id.fl_image);
 
-        ScrollUtils.addOnGlobalLayoutListener(mScrollView, new Runnable() {
-            @Override
-            public void run() {
-                onScrollChanged(0, false, false);
-
-//                mScrollView.scrollTo(0, mFlexibleSpaceImageHeight - mActionBarSize);
-
-                // If you'd like to start from scrollY == 0, don't write like this:
-                //mScrollView.scrollTo(0, 0);
-                // The initial scrollY is 0, so it won't invoke onScrollChanged().
-                // To do this, use the following:
-                //onScrollChanged(0, false, false);
-
-                // You can also achieve it with the following codes.
-                // This causes scroll change from 1 to 0.
-                //mScrollView.scrollTo(0, 1);
-                //mScrollView.scrollTo(0, 0);
-            }
-        });
 
         TextView textView = (TextView) findViewById(R.id.title);
         TextView descriptionView = (TextView) findViewById(R.id.description);
         TextView usageView = (TextView) findViewById(R.id.usage);
         TextView affectView = (TextView) findViewById(R.id.affect);
         TextView cautionsView = (TextView) findViewById(R.id.cautions);
-        TextView addictionView = (TextView) findViewById(R.id.addiction);
-        TextView priceView = (TextView) findViewById(R.id.price);
+//        TextView addictionView = (TextView) findViewById(R.id.addiction);
+//        TextView priceView = (TextView) findViewById(R.id.price);
         ImageView coverView = (ImageView) findViewById(R.id.cover);
+
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -100,10 +101,10 @@ public class DrugDetailsActivity extends AppCompatActivity implements Observable
         usageView.setText(usage);
         affectView.setText(affect);
         cautionsView.setText(cautions);
-        priceView.setText("$" + price);
+//        priceView.setText("$" + price);
         ImageLoader.getInstance().displayImage(cover, coverView);
 
-        assert addiction != null;
+/*        assert addiction != null;
         switch (addiction) {
             case None:
                 addictionView.setText(R.string.addiction_level_none);
@@ -117,68 +118,118 @@ public class DrugDetailsActivity extends AppCompatActivity implements Observable
             case High:
                 addictionView.setText(R.string.addiction_level_high);
                 break;
-        }
+        }*/
+
+        configureToolbarView();
+        configureScrollView();
 
     }
 
-    protected int getActionBarSize() {
-        TypedValue typedValue = new TypedValue();
-        int[] textSizeAttr = new int[]{R.attr.actionBarSize};
-        int indexOfAttrTextSize = 0;
-        TypedArray a = obtainStyledAttributes(typedValue.data, textSizeAttr);
-        int actionBarSize = a.getDimensionPixelSize(indexOfAttrTextSize, -1);
-        a.recycle();
-        return actionBarSize;
+
+    private void configureScrollView() {
+        mScrollView.setScrollViewCallbacks(this);
+        mScrollView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+
+        mScrollView.setOnFlingListener(new ObservableScrollViewWithFling.OnFlingListener() {
+            @Override
+            public void onFlingStarted() {
+                if (goingUp && !mIsToolbarShown) {
+                    showFullToolbar(50);
+                }
+            }
+
+            @Override
+            public void onFlingStopped() {
+
+            }
+        });
+
+        ViewTreeObserver vto = mTitle.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                    mTitle.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                } else {
+                    mTitle.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                }
+                updateFlexibleSpaceText(0);
+            }
+        });
+    }
+
+    private void configureToolbarView() {
+//        ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbarView);
+
+        getSupportActionBar();
+
+        mToolbarView.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        mToolbarView.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
+        //Remove toolbars title, as we have our own title implementation
+        mToolbarView.post(new Runnable() {
+            @Override
+            public void run() {
+                mToolbarView.setTitle("");
+
+            }
+        });
+
+        mToolbarBackgroundColor = getResources().getColor(R.color.colorPrimary);
+        TypedValue tv = new TypedValue();
+        if (this.getTheme().resolveAttribute(R.attr.actionBarSize, tv, true)) {
+            mToolbarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
+        }
+        setBackgroundAlpha(mToolbarView, 0.0f, mToolbarBackgroundColor);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 
     @Override
     public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
-        // Translate overlay and image
-        float flexibleRange = mFlexibleSpaceImageHeight - mActionBarSize;
-        int minOverlayTransitionY = mActionBarSize - mOverlayView.getHeight();
-        ViewHelper.setTranslationY(mOverlayView, ScrollUtils.getFloat(-scrollY, minOverlayTransitionY, 0));
-        ViewHelper.setTranslationY(mImageView, ScrollUtils.getFloat(-scrollY / 2, minOverlayTransitionY, 0));
+        //Store actual scroll state:
+        if (mScrollY > scrollY) {
+            goingUp = true;
+        } else if (mScrollY < scrollY) {
+            goingUp = false;
+        }
 
-        // Change alpha of overlay
-        ViewHelper.setAlpha(mOverlayView, ScrollUtils.getFloat((float) scrollY / flexibleRange, 0, 1));
+        //If we're close to edge, show toolbar faster
+        if (mScrollY - scrollY > 50 && !mIsToolbarShown) {
+            showFullToolbar(50); //speed up
+        } else if (mScrollY - scrollY > 0 && scrollY <= mParallaxImageHeight && !mIsToolbarShown) {
+            showFullToolbar(250);
+        }
 
-        // Scale price text
-        float scalePrice = 1 + ScrollUtils.getFloat((flexibleRange - scrollY) / flexibleRange, 0, MAX_TEXT_SCALE_DELTA);
-        ViewHelper.setPivotX(mPriceView, 0);
-        ViewHelper.setPivotY(mPriceView, 0);
-        ViewHelper.setScaleX(mPriceView, scalePrice);
-        ViewHelper.setScaleY(mPriceView, scalePrice);
+        //Show or hide full toolbar color, so it will become visible over scrollable content:
+        if (scrollY >= mParallaxImageHeight - mToolbarHeight) {
+            setBackgroundAlpha(mToolbarView, 1, mToolbarBackgroundColor);
+        } else {
+            setBackgroundAlpha(mToolbarView, 0, mToolbarBackgroundColor);
+        }
 
-        // Scale addiction text
-        float scaleAddiction = 1 + ScrollUtils.getFloat((flexibleRange - scrollY) / flexibleRange, 0, MAX_TEXT_SCALE_DELTA);
-        ViewHelper.setPivotX(mAddictionView, 0);
-        ViewHelper.setPivotY(mAddictionView, 0);
-        ViewHelper.setScaleX(mAddictionView, scaleAddiction);
-        ViewHelper.setScaleY(mAddictionView, scaleAddiction);
+        //Translate flexible image in Y axis
+        ViewHelper.setTranslationY(flImage, scrollY / 2);
 
-        // Scale title text
-        float scaleTitle = 1 + ScrollUtils.getFloat((flexibleRange - scrollY) / flexibleRange, 0, MAX_TEXT_SCALE_DELTA);
-        ViewHelper.setPivotX(mTitleView, 0);
-        ViewHelper.setPivotY(mTitleView, 0);
-        ViewHelper.setScaleX(mTitleView, scaleTitle);
-        ViewHelper.setScaleY(mTitleView, scaleTitle);
+        //Calculate flexible space alpha based on scroll state
+        float alpha = 1 - (float) Math.max(0, mParallaxImageHeight - (mToolbarHeight) - scrollY) / (mParallaxImageHeight - (mToolbarHeight * 1.5f));
+        setBackgroundAlpha(llTintLayer, alpha, mToolbarBackgroundColor);
 
+        //Store last scroll state
+        mScrollY = scrollY;
 
-        // Translate title text
-        int maxTitleTranslationY = (int) (mFlexibleSpaceImageHeight - mTitleView.getHeight() * scaleTitle);
-        int titleTranslationY = maxTitleTranslationY - scrollY;
-        ViewHelper.setTranslationY(mTitleView, titleTranslationY);
-
-        // Translate price text
-        int maxPriceTranslationY = (int) (mFlexibleSpaceImageHeight - mPriceView.getHeight() * scalePrice);
-        int priceTranslationY = maxPriceTranslationY - scrollY - 96;
-        ViewHelper.setTranslationY(mPriceView, priceTranslationY);
-
-        // Translate addiction text
-        int maxAddictionTranslationY = (int) (mFlexibleSpaceImageHeight - mAddictionView.getHeight() * scaleAddiction);
-        int addictionTranslationY = maxAddictionTranslationY - scrollY - 96;
-        ViewHelper.setTranslationY(mAddictionView, addictionTranslationY);
-
+        //Move the flexible text
+        updateFlexibleSpaceText((scrollY));
     }
 
     @Override
@@ -189,6 +240,114 @@ public class DrugDetailsActivity extends AppCompatActivity implements Observable
     @Override
     public void onUpOrCancelMotionEvent(ScrollState scrollState) {
 
+        //If we're scrolling up, and are too far away from toolbar, hide it:
+        if (scrollState == ScrollState.UP) {
+            if (mScrollY > mParallaxImageHeight) {
+                if (mIsToolbarShown) {
+                    hideFullToolbar();
+                }
+            } else {
+                // Don't hide toolbar yet
+            }
+        } else if (scrollState == ScrollState.DOWN) {
+            //Show toolbar as fast as we're starting to scroll down
+            if (!mIsToolbarShown) {
+                showFullToolbar(250);
+            }
+        }
+    }
+
+    private void setBackgroundAlpha(View view, float alpha, int baseColor) {
+        int a = Math.min(255, Math.max(0, (int) (alpha * 255))) << 24;
+        int rgb = 0x00ffffff & baseColor;
+        view.setBackgroundColor(a + rgb);
+    }
+
+
+    public void showFullToolbar(int duration) {
+        mIsToolbarShown = true;
+
+        final AnimatorSet animatorSet = buildAnimationSet(duration,
+                buildAnimation(mToolbarView, -mToolbarHeight, 0),
+                buildAnimation(mTitle, -mToolbarHeight, 0));
+
+        animatorSet.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+                updateFlexibleSpaceText(mScrollY); //dirty update fling-fix
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                updateFlexibleSpaceText(mScrollY); //dirty update fling-fix
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
+
+        animatorSet.start();
+
+    }
+
+    private ObjectAnimator buildAnimation(View view, float from, float to) {
+        return ObjectAnimator
+                .ofFloat(view, View.TRANSLATION_Y, from, to);
+    }
+
+    public void hideFullToolbar() {
+        mIsToolbarShown = false;
+        final AnimatorSet animatorSet = buildAnimationSet(250,
+                buildAnimation(mToolbarView, 0, -mToolbarHeight),
+                buildAnimation(mTitle, 0, -mToolbarHeight));
+        animatorSet.start();
+    }
+
+    private AnimatorSet buildAnimationSet(int duration, ObjectAnimator... objectAnimators) {
+
+        AnimatorSet a = new AnimatorSet();
+        a.playTogether(objectAnimators);
+        a.setInterpolator(AnimationUtils.loadInterpolator(this, android.R.interpolator.accelerate_decelerate));
+        a.setDuration(duration);
+
+        return a;
+    }
+
+    /**
+     * Scale title view and move it in Flexible space
+     * @param scrollY
+     */
+    private void updateFlexibleSpaceText(final int scrollY) {
+        if (!mIsToolbarShown) return;
+
+        int adjustedScrollY = scrollY;
+        if (scrollY < 0) {
+            adjustedScrollY = 0;
+        } else if (scrollY > mParallaxImageHeight) {
+            adjustedScrollY = mParallaxImageHeight;
+        }
+
+        float maxScale = 1.6f;
+        float scale = maxScale * ((float) (mParallaxImageHeight - mToolbarHeight) - adjustedScrollY) / (mParallaxImageHeight - mToolbarHeight);
+        if (scale < 0) {
+            scale = 0;
+        }
+
+        ViewHelper.setPivotX(mTitle, 0);
+        ViewHelper.setPivotY(mTitle, 0);
+        ViewHelper.setScaleX(mTitle, 1 + scale);
+        ViewHelper.setScaleY(mTitle, 1 + scale);
+
+        int maxTitleTranslation = (int) (mParallaxImageHeight * 0.4f);
+        int titleTranslation = (int) (maxTitleTranslation * ((float) scale / maxScale));
+        ViewHelper.setTranslationY(mTitle, titleTranslation);
     }
 
     public static Intent getActivityIntent(Context context, Drug drug) {

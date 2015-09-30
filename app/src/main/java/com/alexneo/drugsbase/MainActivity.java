@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         setTheme(R.style.AppDefault);
         setContentView(LAYOUT);
 
-
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .showImageForEmptyUri(R.mipmap.placeholder)
 //                .displayer(new RoundedBitmapDisplayer(4))
@@ -122,7 +121,6 @@ public class MainActivity extends AppCompatActivity {
 
 /*    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }

@@ -1,0 +1,331 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.alexneo.drugsbase.views.ObservableScrollViewWithFling
+        android:id="@+id/observable_sv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/scroll_view_child"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false">
+
+            <!-- FLEXIBLE IMAGE SECTION -->
+
+            <FrameLayout
+                android:id="@+id/fl_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/cover"
+                    android:scaleType="centerCrop"
+                    android:background="@mipmap/placeholder"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/flexible_space_image_height"/>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/flexible_space_image_height"
+                    android:id="@+id/ll_above_photo"/>
+
+            </FrameLayout>
+
+            <View
+                android:id="@+id/anchor"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/flexible_space_image_height"
+                android:minHeight="@dimen/flexible_space_image_height" />
+
+            <!--Details container-->
+
+            <LinearLayout android:id="@+id/details_container"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/anchor"
+                android:clipToPadding="false"
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:background="@android:color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/description"
+                        android:text="Some drug description Some drug description Some drug description Some drug description Some drug description Some drug description Some drug description Some drug description Some drug description "
+                        android:textColor="#444"
+                        android:padding="16dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <View
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="#ccc"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"/>
+                    <TextView
+                        android:id="@+id/usage"
+                        android:textColor="#444"
+                        android:text="Some drug usage text Some drug usage text Some drug usage text Some drug usage text Some drug usage text Some drug usage text Some drug usage text Some drug usage text Some drug usage text Some drug usage text "
+                        android:padding="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <View
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="#ccc"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"/>
+                    <TextView
+                        android:id="@+id/cautions"
+                        android:textColor="#444"
+                        android:text="Some drug cautions Some drug cautions Some drug cautions Some drug cautions Some drug cautions Some drug cautions Some drug cautions Some drug cautions Some drug cautions Some drug cautions Some drug cautions "
+                        android:padding="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <View
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="#ccc"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"/>
+                    <TextView
+                        android:id="@+id/affect"
+                        android:textColor="#444"
+                        android:text="Some drug affect Some drug affect Some drug affect Some drug affect Some drug affect Some drug affect Some drug affect Some drug affect Some drug affect Some drug affect Some drug affect Some drug affect Some drug affect "
+                        android:padding="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </com.alexneo.drugsbase.views.ObservableScrollViewWithFling>
+
+    <View
+        android:id="@+id/flexible_space"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent" />
+
+    <include layout="@layout/view_toolbar"
+        android:id="@+id/toolbar"
+        android:layout_alignParentTop="true"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/toolbar_margin_start">
+
+        <TextView
+            android:id="@+id/title"
+            android:text="@string/drug_item_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:minHeight="?attr/actionBarSize"
+            android:textColor="@android:color/white"
+            android:textSize="35sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/transparent"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/flexible_space_image_height"
+                android:background="@android:color/transparent" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>
+
+
+
+
+<!--
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    &lt;!&ndash; FLEXIBLE IMAGE &ndash;&gt;
+
+    <include layout="@layout/view_toolbar"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        />
+
+    <ImageView
+        android:id="@+id/cover"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/flexible_space_image_height" />
+    <View
+        android:background="@drawable/text_protector_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/flexible_space_image_height" />
+    <View
+        android:id="@+id/overlay"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/flexible_space_image_height"
+        android:background="@color/colorPrimary" />
+
+    <com.github.ksoichiro.android.observablescrollview.ObservableScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/flexible_space_image_height"
+                android:background="@android:color/transparent" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:background="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/description"
+                    android:text="Some drug description Some drug description Some drug description Some drug description Some drug description Some drug description Some drug description Some drug description Some drug description "
+                    android:textColor="#444"
+                    android:padding="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <View
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="#ccc"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+                <TextView
+                    android:id="@+id/usage"
+                    android:textColor="#444"
+                    android:text="Some drug usage text Some drug usage text Some drug usage text Some drug usage text Some drug usage text Some drug usage text Some drug usage text Some drug usage text Some drug usage text Some drug usage text "
+                    android:padding="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <View
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="#ccc"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+                <TextView
+                    android:id="@+id/cautions"
+                    android:textColor="#444"
+                    android:text="Some drug cautions Some drug cautions Some drug cautions Some drug cautions Some drug cautions Some drug cautions Some drug cautions Some drug cautions Some drug cautions Some drug cautions Some drug cautions "
+                    android:padding="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <View
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="#ccc"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+                <TextView
+                    android:id="@+id/affect"
+                    android:textColor="#444"
+                    android:text="Some drug affect Some drug affect Some drug affect Some drug affect Some drug affect Some drug affect Some drug affect Some drug affect Some drug affect Some drug affect Some drug affect Some drug affect Some drug affect "
+                    android:padding="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.github.ksoichiro.android.observablescrollview.ObservableScrollView>
+
+    &lt;!&ndash; FLEXIBLE TITLE &ndash;&gt;
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/margin_standard">
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/price"
+            android:layout_above="@+id/title"
+            android:text="$100"
+            android:textSize="14sp"
+            android:layout_marginBottom="12dp"
+            android:padding="5dp"
+            android:background="@drawable/price_background"
+            android:textColor="#555"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/addiction"
+            android:layout_above="@+id/title"
+            android:paddingLeft="16dp"
+            android:layout_toRightOf="@+id/price"
+            android:text="Сильная зависимость"
+            android:textColor="#fff"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/title"
+            android:text="@string/drug_item_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:minHeight="?attr/actionBarSize"
+            android:textColor="@android:color/white"
+            android:textSize="35sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/flexible_space_image_height"
+            android:background="@android:color/transparent" />
+
+    </RelativeLayout>
+</FrameLayout>-->
