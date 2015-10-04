@@ -36,24 +36,19 @@ import butterknife.ButterKnife;
 public class DrugDetailsActivity extends AppCompatActivity implements ObservableScrollViewCallbacks{
 
     ObservableScrollViewWithFling mScrollView;
-    TextView mTitle; //Title used instead of Toolbar.title
-    Toolbar mToolbarView;
-    protected LinearLayout llTintLayer; //Layout that we're tinting when scrolling
-    protected FrameLayout flImage; //Layout that hosts the header image
-
-    private View mImageView;
-    private View mOverlayView;
-    private TextView mTitleView;
+    private TextView mTitleView; //Title used instead of Toolbar.title
     private TextView mPriceView;
     private TextView mAddictionView;
-    private int mActionBarSize;
-    private int mFlexibleSpaceImageHeight;
+    Toolbar mToolbarView;
+    protected LinearLayout llTintLayer; //Layout that we're tinting when scrolling
+
+    protected FrameLayout flImage; //Layout that hosts the header image
     private int mParallaxImageHeight;
     private int mScrollY = 0; //Keeps track of our scroll.
     private boolean mIsToolbarShown = true;
     private int mToolbarHeight;
-    private boolean goingUp = false;
 
+    private boolean goingUp = false;
     private int mToolbarBackgroundColor;
 
     public DrugDetailsActivity() {
@@ -68,7 +63,9 @@ public class DrugDetailsActivity extends AppCompatActivity implements Observable
         mParallaxImageHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
 
         mScrollView = (ObservableScrollViewWithFling) findViewById(R.id.observable_sv);
-        mTitle = (TextView) findViewById(R.id.title);
+        mTitleView = (TextView) findViewById(R.id.title);
+        mPriceView = (TextView) findViewById(R.id.price);
+        mAddictionView = (TextView) findViewById(R.id.addiction);
         mToolbarView = (Toolbar) findViewById(R.id.toolbar_view);
         llTintLayer = (LinearLayout) findViewById(R.id.ll_above_photo);
         flImage = (FrameLayout) findViewById(R.id.fl_image);
@@ -79,8 +76,8 @@ public class DrugDetailsActivity extends AppCompatActivity implements Observable
         TextView usageView = (TextView) findViewById(R.id.usage);
         TextView affectView = (TextView) findViewById(R.id.affect);
         TextView cautionsView = (TextView) findViewById(R.id.cautions);
-//        TextView addictionView = (TextView) findViewById(R.id.addiction);
-//        TextView priceView = (TextView) findViewById(R.id.price);
+        TextView addictionView = (TextView) findViewById(R.id.addiction);
+        TextView priceView = (TextView) findViewById(R.id.price);
         ImageView coverView = (ImageView) findViewById(R.id.cover);
 
 
@@ -101,10 +98,10 @@ public class DrugDetailsActivity extends AppCompatActivity implements Observable
         usageView.setText(usage);
         affectView.setText(affect);
         cautionsView.setText(cautions);
-//        priceView.setText("$" + price);
+        priceView.setText("$" + price);
         ImageLoader.getInstance().displayImage(cover, coverView);
 
-/*        assert addiction != null;
+        assert addiction != null;
         switch (addiction) {
             case None:
                 addictionView.setText(R.string.addiction_level_none);
@@ -118,7 +115,7 @@ public class DrugDetailsActivity extends AppCompatActivity implements Observable
             case High:
                 addictionView.setText(R.string.addiction_level_high);
                 break;
-        }*/
+        }
 
         configureToolbarView();
         configureScrollView();
@@ -144,14 +141,14 @@ public class DrugDetailsActivity extends AppCompatActivity implements Observable
             }
         });
 
-        ViewTreeObserver vto = mTitle.getViewTreeObserver();
+        ViewTreeObserver vto = mTitleView.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-                    mTitle.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                    mTitleView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                 } else {
-                    mTitle.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    mTitleView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 }
                 updateFlexibleSpaceText(0);
             }
@@ -269,7 +266,7 @@ public class DrugDetailsActivity extends AppCompatActivity implements Observable
 
         final AnimatorSet animatorSet = buildAnimationSet(duration,
                 buildAnimation(mToolbarView, -mToolbarHeight, 0),
-                buildAnimation(mTitle, -mToolbarHeight, 0));
+                buildAnimation(mTitleView, -mToolbarHeight, 0));
 
         animatorSet.addListener(new Animator.AnimatorListener() {
             @Override
@@ -306,7 +303,7 @@ public class DrugDetailsActivity extends AppCompatActivity implements Observable
         mIsToolbarShown = false;
         final AnimatorSet animatorSet = buildAnimationSet(250,
                 buildAnimation(mToolbarView, 0, -mToolbarHeight),
-                buildAnimation(mTitle, 0, -mToolbarHeight));
+                buildAnimation(mTitleView, 0, -mToolbarHeight));
         animatorSet.start();
     }
 
@@ -334,20 +331,45 @@ public class DrugDetailsActivity extends AppCompatActivity implements Observable
             adjustedScrollY = mParallaxImageHeight;
         }
 
-        float maxScale = 1.6f;
-        float scale = maxScale * ((float) (mParallaxImageHeight - mToolbarHeight) - adjustedScrollY) / (mParallaxImageHeight - mToolbarHeight);
-        if (scale < 0) {
-            scale = 0;
+        float maxScale = 0.4f;
+        float scaleTitle = maxScale * ((float) (mParallaxImageHeight - mToolbarHeight) - adjustedScrollY) / (mParallaxImageHeight - mToolbarHeight);
+        if (scaleTitle < 0) {
+            scaleTitle = 0;
         }
 
-        ViewHelper.setPivotX(mTitle, 0);
-        ViewHelper.setPivotY(mTitle, 0);
-        ViewHelper.setScaleX(mTitle, 1 + scale);
-        ViewHelper.setScaleY(mTitle, 1 + scale);
 
-        int maxTitleTranslation = (int) (mParallaxImageHeight * 0.4f);
-        int titleTranslation = (int) (maxTitleTranslation * ((float) scale / maxScale));
-        ViewHelper.setTranslationY(mTitle, titleTranslation);
+        ViewHelper.setPivotX(mTitleView, 0);
+        ViewHelper.setPivotY(mTitleView, 0);
+        ViewHelper.setScaleX(mTitleView, 1 + scaleTitle); // 1 + scale
+        ViewHelper.setScaleY(mTitleView, 1 + scaleTitle); // 1 + scale
+
+        // Translate title text
+//        int maxTitleTranslation = (int) (mParallaxImageHeight - mTitleView.getHeight() * scaleTitle);
+        int maxTitleTranslation = (int) (mParallaxImageHeight * 0.7f);
+        int titleTranslation = (int) (maxTitleTranslation * ((float) scaleTitle / maxScale));
+        ViewHelper.setTranslationY(mTitleView, titleTranslation);
+
+        ViewHelper.setPivotX(mPriceView, 0);
+        ViewHelper.setPivotY(mPriceView, 0);
+        ViewHelper.setScaleX(mPriceView, 1); // 1 + scale
+        ViewHelper.setScaleY(mPriceView, 1); // 1 + scale
+
+        // Translate price text
+        int maxPriceTranslation = (int) (mParallaxImageHeight * 0.7f);
+        int priceTranslation = (int) (maxPriceTranslation * ((float) scaleTitle / maxScale) - 56);
+        ViewHelper.setTranslationY(mPriceView, priceTranslation);
+
+        ViewHelper.setPivotX(mAddictionView, 0);
+        ViewHelper.setPivotY(mAddictionView, 0);
+        ViewHelper.setScaleX(mAddictionView, 1); // 1 + scale
+        ViewHelper.setScaleY(mAddictionView, 1); // 1 + scale
+
+        // Translate addiction text
+        int maxAddictionTranslation = (int) (mParallaxImageHeight * 0.7f);
+        int addictionTranslation = (int) (maxAddictionTranslation * ((float) scaleTitle / maxScale) - 36);
+        ViewHelper.setTranslationY(mAddictionView, addictionTranslation);
+
+
     }
 
     public static Intent getActivityIntent(Context context, Drug drug) {

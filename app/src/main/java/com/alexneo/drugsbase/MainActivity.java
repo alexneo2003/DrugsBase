@@ -10,6 +10,7 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -28,6 +29,12 @@ import android.widget.ListView;
 import android.widget.TabHost;
 
 import com.alexneo.drugsbase.Adapter.TabsPagerFragmentAdapter;
+import com.github.ksoichiro.android.observablescrollview.ObservableListView;
+import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
+import com.github.ksoichiro.android.observablescrollview.ScrollState;
+import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
+import com.nineoldandroids.view.ViewHelper;
+import com.nineoldandroids.view.ViewPropertyAnimator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -39,7 +46,7 @@ import java.util.List;
 
 import static android.R.id.tabcontent;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     private static final int LAYOUT =  R.layout.activity_main;
 
@@ -64,8 +71,6 @@ public class MainActivity extends AppCompatActivity {
                 .defaultDisplayImageOptions(options)
                 .build();
         ImageLoader.getInstance().init(config);
-
-
 
         initToolbar();
         initNavigationView();

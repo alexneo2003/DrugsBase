@@ -134,6 +134,29 @@
         android:paddingLeft="@dimen/toolbar_margin_start">
 
         <TextView
+            android:id="@+id/price"
+            android:layout_above="@+id/title"
+            android:text="$100"
+            android:textSize="14sp"
+            android:layout_marginBottom="12dp"
+            android:padding="5dp"
+            android:background="@drawable/price_background"
+            android:textColor="#555"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/addiction"
+            android:layout_above="@+id/title"
+            android:paddingLeft="16dp"
+            android:layout_toRightOf="@+id/price"
+            android:text="Сильная зависимость"
+            android:textColor="#fff"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
             android:id="@+id/title"
             android:text="@string/drug_item_title"
             android:layout_width="match_parent"
