@@ -12,4 +12,6 @@
     <color name="greyBackground">#e4e4e4</color>
     <color name="white">#fff</color>
     <color name="white_transparent">#a9ffffff</color>
+    <color name="black_transparent">#32000000</color>
+    <color name="transparent">#00ffffff</color>
 </resources>

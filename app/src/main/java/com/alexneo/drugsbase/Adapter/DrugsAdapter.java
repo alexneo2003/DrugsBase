@@ -1,4 +1,4 @@
-package com.alexneo.drugsbase;
+package com.alexneo.drugsbase.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,10 +12,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alexneo.drugsbase.Drug;
 import com.alexneo.drugsbase.Fragment.DrugFragment;
+import com.alexneo.drugsbase.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.zip.Inflater;
 
 public class DrugsAdapter extends BaseAdapter{

@@ -63,6 +63,12 @@
     <string name="title_section2">Weapons</string>
     <string name="title_section3">Alcohol</string>
     <string name="title_section4">Settings</string>
+    <string name="error_connection_title">Connection error</string>
+    <string name="error_connection_text">To use the application requires a stable internet connection</string>
+    <string name="error_connection_retry">Retry</string>
+    <string name="search_hint">Search</string>
+    <string name="back_pressed">Please click BACK again to exit</string>
+    <string name="title_activity_search">SearchActivity</string>
 
 
     <!-- DRUGS  PRISE  -->

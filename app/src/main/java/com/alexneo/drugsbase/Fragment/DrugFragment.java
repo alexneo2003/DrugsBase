@@ -1,38 +1,38 @@
 package com.alexneo.drugsbase.Fragment;
 
-import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.app.AlertDialog;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alexneo.drugsbase.AddictionLevel;
 import com.alexneo.drugsbase.Drug;
 import com.alexneo.drugsbase.DrugDetailsActivity;
-import com.alexneo.drugsbase.DrugsAdapter;
-import com.alexneo.drugsbase.MainActivity;
+import com.alexneo.drugsbase.Adapter.DrugsAdapter;
 import com.alexneo.drugsbase.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.rey.material.widget.Button;
 import com.rey.material.widget.ProgressView;
 
-import org.w3c.dom.Text;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -45,12 +45,12 @@ public class DrugFragment extends Fragment {
     private View view;
     private ListView listView;
     private ProgressView mProgress;
-    private int mProgressStatus = 0;
-    private Handler mHandler = new Handler();
     private TextView titleTextError;
     private TextView textError;
     private Button buttonError;
     private ImageView imageView;
+    private Toolbar toolbar;
+    private MaterialSearchView searchView;
 
     List<Drug> drugsList = new ArrayList<Drug>(){{
         add(new Drug(21,
@@ -130,11 +130,21 @@ public class DrugFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.list_item_layout, container, false);
         listView = (ListView) view.findViewById(R.id.listView);
-        mProgress = (ProgressView) view.findViewById(R.id.loading);
         titleTextError = (TextView) view.findViewById(R.id.network_error_titleText);
         textError = (TextView) view.findViewById(R.id.network_error_text);
         buttonError = (Button) view.findViewById(R.id.network_error_button);
         imageView = (ImageView) view.findViewById(R.id.network_error_image);
+        mProgress = (ProgressView) view.findViewById(R.id.loading);
+//        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+//        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_view);
+
+
+//        searchView = (MaterialSearchView) view.findViewById(R.id.search_view);
+//        searchView.setCursorDrawable(R.drawable.color_cursor);
+
+//        listView.setTextFilterEnabled(true);
+
+        setHasOptionsMenu(true);
 
         load();
 
@@ -193,15 +203,15 @@ public class DrugFragment extends Fragment {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-
-                mProgress.setVisibility(View.GONE);
                 hideError();
-
+                mProgress.setVisibility(View.GONE);
+                listView.setVisibility(View.VISIBLE);
 
                 if (s == null){
                     showError();
                 }
 
+                drugsList.get(0).cover = "http://www.snopes.com/wp-content/uploads/2015/09/ecstasy-1.jpg";
                 drugsList.get(0).description = "бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... ";
                 drugsList.get(0).cautions = "бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... ";
                 drugsList.get(0).affect = "бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... ";
@@ -210,6 +220,14 @@ public class DrugFragment extends Fragment {
                 drugsList.get(1).cautions = "бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... ";
                 drugsList.get(1).affect = "бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... ";
                 drugsList.get(1).usage = "бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... бла бла бла... ";
+                drugsList.get(2).name = "Метамфетамин";
+                drugsList.get(2).cover = "http://cs.pikabu.ru/images/big_size_comm/2011-12_5/13247094044991.jpg";
+                drugsList.get(3).name = "Эфедрин";
+                drugsList.get(3).cover = "http://narcolikvidator.ru/wp-content/uploads/2011/09/Ephedrine-narcolikvidator.jpg";
+                drugsList.get(4).name = "Кокаин";
+                drugsList.get(4).cover = "http://image.tsn.ua/media/images2/original/Sep2012/383673230.jpg";
+                drugsList.get(5).name = "Псилоцибин";
+                drugsList.get(5).cover = "http://excitermag.net/wp-content/uploads/2012/12/magic-mushrooms.jpg";
 
                 final DrugsAdapter drugsAdapter = new DrugsAdapter(getActivity(), drugsList);
                 listView.setAdapter(drugsAdapter);
@@ -230,10 +248,10 @@ public class DrugFragment extends Fragment {
 
     public void showError() {
         listView.setVisibility(View.GONE);
+        imageView.setVisibility(View.VISIBLE);
         titleTextError.setVisibility(View.VISIBLE);
         textError.setVisibility(View.VISIBLE);
         buttonError.setVisibility(View.VISIBLE);
-        imageView.setVisibility(View.VISIBLE);
 
         buttonError.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -244,12 +262,56 @@ public class DrugFragment extends Fragment {
     }
 
     public void hideError(){
-        listView.setVisibility(View.VISIBLE);
-//        mProgress.setVisibility(View.VISIBLE);
+        mProgress.setVisibility(View.VISIBLE);
+        imageView.setVisibility(View.GONE);
         titleTextError.setVisibility(View.GONE);
         textError.setVisibility(View.GONE);
         buttonError.setVisibility(View.GONE);
-        imageView.setVisibility(View.GONE);
     }
+
+
+///*
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        inflater.inflate(R.menu.menu_search, menu);
+//        super.onCreateOptionsMenu(menu, inflater);
+//
+//        MenuItem item = menu.findItem(R.id.action_search);
+//        searchView.setMenuItem(item);
+//
+//
+//        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                //Do some magic
+//
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                //Do some magic
+//
+//                return false;
+//            }
+//        });
+//
+//        searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+//            @Override
+//            public void onSearchViewShown() {
+//                //Do some magic
+//            }
+//
+//            @Override
+//            public void onSearchViewClosed() {
+//                //Do some magic
+//            }
+//        });
+//
+////        return true;
+//
+//    }
+//*/
+
 
 }

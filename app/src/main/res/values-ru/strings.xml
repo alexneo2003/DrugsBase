@@ -14,4 +14,9 @@
     <string name="drug_menu_title">Наркотики</string>
     <string name="alcohol_menu_title">Алкоголь</string>
     <string name="weapon_menu_title">Оружие</string>
+    <string name="error_connection_title">Ошибка подключения</string>
+    <string name="error_connection_text">Для работы приложения требуется стабильное соединение с интернетом</string>
+    <string name="error_connection_retry">Повторить попытку</string>
+    <string name="search_hint">Поиск</string>
+    <string name="back_pressed">Нажмите кнопку НАЗАД снова, чтобы выйти из программы</string>
 </resources>

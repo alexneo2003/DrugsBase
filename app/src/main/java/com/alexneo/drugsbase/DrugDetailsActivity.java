@@ -156,11 +156,10 @@ public class DrugDetailsActivity extends AppCompatActivity implements Observable
     }
 
     private void configureToolbarView() {
-//        ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbarView);
 
         getSupportActionBar();
 
-        mToolbarView.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        mToolbarView.setNavigationIcon(R.mipmap.ic_arrow_left);
         mToolbarView.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -186,11 +185,11 @@ public class DrugDetailsActivity extends AppCompatActivity implements Observable
     }
 
 
-    @Override
+/*    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }
+    }*/
 
     @Override
     public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {

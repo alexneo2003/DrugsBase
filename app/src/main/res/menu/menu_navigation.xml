@@ -5,22 +5,23 @@
     <item
         android:id="@+id/actionDrugItem"
         android:title="@string/drug_menu_title"
-        android:orderInCategory="1"
+        android:orderInCategory="10"
         android:icon="@mipmap/ic_auto_fix"/>
     <item
         android:id="@+id/actionWeaponItem"
         android:title="@string/weapon_menu_title"
-        android:orderInCategory="2"
+        android:orderInCategory="20"
         android:icon="@mipmap/ic_auto_fix"/>
     <item
         android:id="@+id/actionAlcoholItem"
         android:title="@string/alcohol_menu_title"
-        android:orderInCategory="3"
+        android:orderInCategory="30"
         android:icon="@mipmap/ic_auto_fix"/>
 
     <item
+        android:id="@+id/actionSearchItem"
         android:title="@string/search_title"
-        android:orderInCategory="5"
+        android:orderInCategory="50"
         android:icon="@mipmap/ic_magnify"/>
 
 </menu>

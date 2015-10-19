@@ -17,10 +17,12 @@
             android:layout_height="wrap_content">
 
             <include layout="@layout/view_toolbar"
-            android:id="@+id/toolbar"
-            android:layout_alignParentTop="true"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"/>
+                android:id="@+id/toolbar"/>
+
+            <com.miguelcatalan.materialsearchview.MaterialSearchView
+                android:id="@+id/search_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
             <com.alexneo.drugsbase.views.IconTabLayout
                 android:id="@+id/tabLayout"
@@ -49,6 +51,5 @@
         android:layout_gravity="start"
         app:menu="@menu/menu_navigation"
         app:headerLayout="@layout/navigation_header"/>
-
 
 </android.support.v4.widget.DrawerLayout>
