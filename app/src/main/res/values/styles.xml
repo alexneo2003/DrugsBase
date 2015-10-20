@@ -16,6 +16,16 @@
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="MaterialSearchViewStyle">
+        <item name="searchBackground">@color/colorPrimary</item>
+        <item name="searchBackIcon">@mipmap/ic_arrow_left</item>
+
+        <item name="android:textColor">@color/white</item>
+
+
+    </style>
+
 <!--
     <style name="AppSearchViewStyle" parent="Widget.AppCompat.SearchView">
         <item name="android:textCursorDrawable">@drawable/white_cursor</item>

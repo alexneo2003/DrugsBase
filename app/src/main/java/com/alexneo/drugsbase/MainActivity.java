@@ -1,63 +1,24 @@
 package com.alexneo.drugsbase;
 
-import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTabHost;
-import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.SearchView;
-import android.widget.TabHost;
 import android.widget.Toast;
 
 import com.alexneo.drugsbase.Adapter.TabsPagerFragmentAdapter;
-import com.alexneo.drugsbase.Fragment.DrugFragment;
-import com.github.ksoichiro.android.observablescrollview.ObservableListView;
-import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
-import com.github.ksoichiro.android.observablescrollview.ScrollState;
-import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
-import com.nineoldandroids.view.ViewHelper;
-import com.nineoldandroids.view.ViewPropertyAnimator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.zip.Inflater;
-
-import static android.R.id.tabcontent;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -94,7 +55,7 @@ public class MainActivity extends AppCompatActivity{
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
 
         searchView = (MaterialSearchView) findViewById(R.id.search_view);
-        searchView.setCursorDrawable(R.drawable.color_cursor);
+        searchView.setCursorDrawable(R.drawable.color_cursor_primary);
 
 
 //        initToolbar();
@@ -139,24 +100,39 @@ public class MainActivity extends AppCompatActivity{
                 switch (menuItem.getItemId()) {
                     case R.id.actionDrugItem:
                         showDrugTab();
+                        break;
+
+                    case R.id.actionWeaponItem:
+                        showWeaponTab();
+                        break;
+
+                    case R.id.actionAlcoholItem:
+                        showAlcoholTab();
+                        break;
 
                     case R.id.actionSearchItem:
                         showSearch();
+                        break;
                 }
-
                 return true;
             }
         });
 
     }
 
+    private void showDrugTab(){
+        viewPager.setCurrentItem(0);
+    }
+
+    private void showWeaponTab(){
+        viewPager.setCurrentItem(1);
+    }
+    private void showAlcoholTab(){
+        viewPager.setCurrentItem(2);
+    }
     private void showSearch() {
         Intent intent = new Intent(this, SearchActivity.class);
         startActivity(intent);
-    }
-
-    private void showDrugTab(){
-        viewPager.setCurrentItem(0);
     }
 
     @Override

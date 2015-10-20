@@ -27,6 +27,19 @@ public class SearchActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar_view);
         toolbar.setBackgroundColor(getResources().getColor(R.color.white_transparent));
         toolbar.setTitle("");
+
+        onSearchViewStyling();
+        setSupportActionBar(toolbar);
+
+    }
+
+    public void onSearchViewStyling(){
+        searchView.setCursorDrawable(R.drawable.color_cursor_white);
+        searchView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        searchView.setTextColor(getResources().getColor(R.color.white));
+        searchView.setHintTextColor(getResources().getColor(R.color.white));
+        searchView.setBackIcon(getResources().getDrawable(R.mipmap.ic_arrow_left));
+        searchView.setCloseIcon(getResources().getDrawable(R.mipmap.ic_close));
         searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
             @Override
             public void onSearchViewShown() {
@@ -39,9 +52,8 @@ public class SearchActivity extends AppCompatActivity {
                 finish();
             }
         });
-        setSupportActionBar(toolbar);
-
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

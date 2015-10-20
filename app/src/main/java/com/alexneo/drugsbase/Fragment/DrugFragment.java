@@ -49,8 +49,6 @@ public class DrugFragment extends Fragment {
     private TextView textError;
     private Button buttonError;
     private ImageView imageView;
-    private Toolbar toolbar;
-    private MaterialSearchView searchView;
 
     List<Drug> drugsList = new ArrayList<Drug>(){{
         add(new Drug(21,
@@ -135,14 +133,6 @@ public class DrugFragment extends Fragment {
         buttonError = (Button) view.findViewById(R.id.network_error_button);
         imageView = (ImageView) view.findViewById(R.id.network_error_image);
         mProgress = (ProgressView) view.findViewById(R.id.loading);
-//        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-//        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_view);
-
-
-//        searchView = (MaterialSearchView) view.findViewById(R.id.search_view);
-//        searchView.setCursorDrawable(R.drawable.color_cursor);
-
-//        listView.setTextFilterEnabled(true);
 
         setHasOptionsMenu(true);
 
@@ -268,50 +258,6 @@ public class DrugFragment extends Fragment {
         textError.setVisibility(View.GONE);
         buttonError.setVisibility(View.GONE);
     }
-
-
-///*
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        inflater.inflate(R.menu.menu_search, menu);
-//        super.onCreateOptionsMenu(menu, inflater);
-//
-//        MenuItem item = menu.findItem(R.id.action_search);
-//        searchView.setMenuItem(item);
-//
-//
-//        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                //Do some magic
-//
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                //Do some magic
-//
-//                return false;
-//            }
-//        });
-//
-//        searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
-//            @Override
-//            public void onSearchViewShown() {
-//                //Do some magic
-//            }
-//
-//            @Override
-//            public void onSearchViewClosed() {
-//                //Do some magic
-//            }
-//        });
-//
-////        return true;
-//
-//    }
-//*/
 
 
 }
